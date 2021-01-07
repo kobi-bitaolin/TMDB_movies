@@ -1,0 +1,19 @@
+
+.image-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.image{
+   margin: 20px;
+   border: 10px black solid;
+   box-shadow: 3px 3px 3px #000000;
+}
+
+.home-page > h1 {
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,38 @@
+
+.content-wraps {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      margin-top: 120px;   
+}
+
+.movie-description {
+    width: 50%;
+    margin-right: 10px;
+}
+
+.movie-description  > h1,h2,h3,p {
+    text-align: center;
+    margin: 10px;
+}
+
+.movie-description  >  div > span {
+    text-align: center;
+}
+
+.movie-poster {
+    margin-left: 10px;
+}
+
+.rating {
+    text-align: center;
+    margin: 10px;
+}
+
+
+
+  
+  
+
+
+
