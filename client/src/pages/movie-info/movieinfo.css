@@ -29,6 +29,26 @@
     margin: 10px;
 }
 
+.btn-container {
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   margin-bottom: 8rem;
+   margin-top: 3rem;
+}
+
+.wish-list-btn {
+    padding: 10px;
+    border: none;
+    color: #ff4800;
+    font-weight: 700;
+}
+
+.wish-list-btn:hover {
+        background-color: #ff4800;
+        color: #ffffff;
+}
+
 
 
   

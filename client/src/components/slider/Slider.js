@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from 'react';
 
 const Slider = (props) => {
@@ -8,20 +6,24 @@ const Slider = (props) => {
 
     useEffect(() => {
         let interval;
-
-        console.log('useEffect');
+        // console.log('useEffect');
 
         if (props.homePageImages.length) {
+
             interval = setInterval(() => {
-                // const newIndex = (imageIndex + 1) % props.homePageImages.length;
-                // setImageIndex(newIndex);
+
                 console.log('props' ,props.homePageImages.length - 1 ,'inedx', imageIndex );
+
                 if (props.homePageImages.length - 1 === imageIndex ) {
+
                     setImageIndex(0);
+
                 } else {
+
                     setImageIndex((imageIndex) => imageIndex + 1)
                 }
-            }, 1000)
+
+            }, 2000)
         }
 
 

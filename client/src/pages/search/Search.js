@@ -1,15 +1,8 @@
 import './search.css';
 
  function Search(props) {
-    const {
-        getAllMoviesByName,
-        handleSearchName,
-        movies,
-        changeUrl
+    const { getAllMoviesByName, handleSearchName, movies, changeUrl}  = props;
 
-    } = props;
-
-    console.log(movies);
     return (
         <div className="search-container">
             <div className="form">

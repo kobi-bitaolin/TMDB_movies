@@ -17,7 +17,7 @@ const Home = () => {
             .catch(err => console.log(err))
     }, [])
 
-    console.log(homePageImages);
+    // console.log(homePageImages);
 
     return (
         <div className="home-page">

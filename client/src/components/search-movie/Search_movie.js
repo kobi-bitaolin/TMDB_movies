@@ -1,8 +1,6 @@
-
 import { useState, useEffect } from "react";
-import Search from '../../pages/search/Search';
 import { useHistory } from 'react-router-dom';
-
+import Search from '../../pages/search/Search';
 
 
 const SearchMovie = () => {
@@ -40,7 +38,7 @@ const SearchMovie = () => {
 
 
   const changeUrl = id => {
-        history.push(`/movieinfo/${id}`);
+        history.push(`/movieInfo/${id}`);
  }
       
 
