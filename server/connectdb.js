@@ -1,7 +1,9 @@
 
 const mongoose = require('mongoose');
+const env = require('dotenv');
+env.config();
 
-const db = 'mongodb+srv://kobi23:kobi23@cluster0.dbe8t.mongodb.net/TMDB?retryWrites=true&w=majority';
+const db = process.env.MONGO_DB_URI;
 
 const connectDB = async () => {
   await mongoose.connect(db, {

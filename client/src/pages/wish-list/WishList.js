@@ -1,30 +1,30 @@
 import React from "react";
-import './wishlist.css';
+import "./wishlist.css";
+import Message from './Message'
 
 function WishList(props) {
-
   const { wishList, setWishList } = props;
 
   const deleteList = (row) => {
-      const index = wishList.findIndex(item => item.id === row.id)
-    
-      const newArr = [...wishList]
-      console.log(newArr);
-      
-      if (index === -1) {
-          console.log("not found");
-      } else {
-          if (index !== -1) {
-              newArr.splice(index, 1)
-              console.log(newArr);
-              setWishList(newArr);
-    
-          }
-    
-      }
-  }
+    const index = wishList.findIndex((item) => item.id === row.id);
 
-  return (
+    const newArr = [...wishList];
+    console.log(newArr);
+
+    if (index === -1) {
+      console.log("not found");
+    } else {
+      if (index !== -1) {
+        newArr.splice(index, 1);
+        console.log(newArr);
+        setWishList(newArr);
+      }
+    }
+  };
+
+  return wishList.length === 0 ? (
+    <Message />
+  ) : (
     <div className="wishlist-container">
       <table>
         <thead>
@@ -46,13 +46,17 @@ function WishList(props) {
                 </td>
                 <td>{row.title}</td>
                 <td className="overview">{row.overview}</td>
-               <td> <i class="fas fa-trash-alt" onClick={() => deleteList(row)}></i></td>
+                <td>
+                  <i
+                    class="fas fa-trash-alt"
+                    onClick={() => deleteList(row)}
+                  ></i>
+                </td>
               </tr>
             </tbody>
           );
         })}
       </table>
-
     </div>
   );
 }

@@ -20,3 +20,20 @@ td {
     cursor: pointer;
 }
 
+.message-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+    margin-bottom: 444px;
+    
+}
+.message-container h4 {
+    border: 2px solid #000;
+    padding: 30px;
+    background-color: red;
+    color: #fff
+}
+
+  
+
