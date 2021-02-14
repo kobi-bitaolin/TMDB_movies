@@ -1,6 +1,7 @@
 import React from "react";
 
 function Message() {
+
   return (
     <div className="message-container">
       <h4>
@@ -10,6 +11,6 @@ function Message() {
       </h4>
     </div>
   );
-}
+};
 
 export default Message;

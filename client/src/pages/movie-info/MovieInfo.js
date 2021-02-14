@@ -20,6 +20,7 @@ const MovieInfo = (props) => {
       .then((res) => res.json())
       .then((data) => {
         setMovie(data);
+        // console.log(data.videos.results[0].key);
         setVideoKey(data.videos.results[0].key);
       })
       .catch((err) => console.log(err));
@@ -32,7 +33,7 @@ const MovieInfo = (props) => {
     });
     // console.log(filter);
     if (filter.length > 0) {
-      alert("Movie Already Exist!");
+      alert("Movie Already Exist In Your Wish List!");
     } else {
       setWishList((prevList) => [...prevList, movie]);
       history.push('/wishlist');
