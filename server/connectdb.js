@@ -4,7 +4,14 @@ const mongoose = require('mongoose');
 // Exits the process if the connection fails.
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_DB_URI);
+    // useNewUrlParser + useUnifiedTopology are required on Mongoose 5 to opt
+    // into the modern URL parser and connection management engine. They became
+    // defaults (and no-ops) in Mongoose 6+, so this block can be simplified
+    // when we eventually upgrade.
+    await mongoose.connect(process.env.MONGO_DB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('MongoDB connected');
   } catch (err) {
     console.error('MongoDB connection error:', err.message);
