@@ -5,15 +5,20 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
+    "start": "nodemon --watch .env --ext js,mjs,json,env app.js",
     "client": "cd../client && npm start",
-    "dev": "concurrently \"npm run start\" \"npm run client"
+    "dev": "concurrently \"npm run start\" \"npm run client\""
   },
   "author": "kobi",
   "license": "ISC",
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
+    "axios": "^1.16.0",
     "bcrypt": "^5.0.0",
     "concurrently": "^5.3.0",
+    "cross-env": "^10.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi": "^17.4.0",

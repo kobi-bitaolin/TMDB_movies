@@ -5,13 +5,11 @@ import Slider from '../../components/slider/Slider';
 const Home = () => {
 
     const [homePageImages, setHomePageImages] = useState([]);
-    const api_key = '4f5c14eec74770b20682e85f6fe0691b';
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}`)
+        fetch('/api/movies/list/top_rated')
             .then(res => res.json())
             .then(data => {
-                console.log(data.results);
                 setHomePageImages(data.results);
             })
             .catch(err => console.log(err))

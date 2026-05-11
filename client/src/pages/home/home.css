@@ -16,4 +16,68 @@
     text-align: center;
     margin-top: 10px;
     text-transform: uppercase;
+
+}.home-page {
+    background-color: #0d253f; /* Brand background color */
+    color: white;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.home-page > h1 {
+    text-align: center;
+    padding: 40px 20px;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    color: #01b4e4;
+    letter-spacing: 2px;
+}
+
+.image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.image {
+    width: 100%;
+    max-width: 1000px; /* Caps the slider size on large screens */
+    border: 5px solid #01b4e4; /* Thin, premium-looking border */
+    border-radius: 15px; /* Rounded corners */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+/* --- Responsive media queries --- */
+
+@media (max-width: 768px) {
+    .home-page > h1 {
+        font-size: 1.8rem; /* Smaller heading on tablet */
+        padding: 30px 10px;
+    }
+
+    .image {
+        border-width: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-page > h1 {
+        font-size: 1.4rem; /* Smaller heading on mobile */
+        letter-spacing: 1px;
+    }
+
+    .image-box {
+        padding: 0 10px; /* Reduce horizontal padding */
+    }
+
+    .image {
+        margin: 10px 0;
+        border-width: 2px;
+    }
 }

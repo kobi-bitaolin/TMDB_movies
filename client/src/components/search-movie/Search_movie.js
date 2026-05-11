@@ -1,39 +1,41 @@
 import { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import Search from '../../pages/search/Search';
+import { useAuth } from "../../auth/AuthContext";
 
 
 const SearchMovie = () => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
-  const api_key = "4f5c14eec74770b20682e85f6fe0691b";
-  
+  const { isLogged } = useAuth();
+
   useEffect(() => {
-    if(!search) {
-      const UrlNewMovies = `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`
-      getMovies(UrlNewMovies);
+    if (!search) {
+      getMovies('/api/movies/list/now_playing');
     }
   }, [search]);
-  
+
   const handleSearchName = e => {
     setSearch(e.target.value);
   };
-  
+
   const getAllMoviesByName = () => {
-    const UrlSearch = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`
-    getMovies(UrlSearch);
+    if (!isLogged) return;
+    getMovies(`/api/movies/search?q=${encodeURIComponent(search)}`);
   };
   
 
   const getMovies = url => {
+    setLoading(true);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.results);
-      
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
 
 
@@ -49,6 +51,8 @@ const SearchMovie = () => {
         handleSearchName={handleSearchName}
         movies={movies}
         changeUrl={changeUrl}
+        isLogged={isLogged}
+        loading={loading}
       />
     </div>
   );

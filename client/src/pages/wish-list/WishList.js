@@ -1,30 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./wishlist.css";
-import Message from './Message'
+import Message from "./Message";
+import Loading from "../../components/loading/Loading";
 
-function WishList(props) {
-  const { wishList, setWishList } = props;
+function WishList() {
+  const [wishList, setWishList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const deleteList = row => {
-    const index = wishList.findIndex((item) => item.id === row.id);
+  useEffect(() => {
+    axios
+      .get("/api/user/wishlist")
+      .then((res) => setWishList(res.data))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, []);
 
-    const newArr = [...wishList];
-    // console.log(newArr);
-
-    if (index === -1) {
-      console.log("not found");
-    } else {
-      if (index !== -1) {
-        newArr.splice(index, 1);
-        // console.log(newArr);
-        setWishList(newArr);
-      }
+  const deleteList = async (row) => {
+    try {
+      const res = await axios.delete(`/api/user/wishlist/${row.id}`);
+      setWishList(res.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  return wishList.length === 0 ? (
-    <Message />
-  ) : (
+  if (loading) return <Loading />;
+  if (wishList.length === 0) return <Message />;
+
+  return (
     <div className="wishlist-container">
       <table>
         <thead>
@@ -34,28 +38,26 @@ function WishList(props) {
             <th>Description</th>
           </tr>
         </thead>
-        {wishList.map((row) => {
-          return (
-            <tbody key={row.id}>
-              <tr className="row">
-                <td>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200/${row.poster_path}`}
-                    alt={`${row.title} poster`}
-                  />
-                </td>
-                <td>{row.title}</td>
-                <td className="overview">{row.overview}</td>
-                <td>
-                  <i
-                    class="fas fa-trash-alt"
-                    onClick={() => deleteList(row)}
-                  ></i>
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
+        <tbody>
+          {wishList.map((row) => (
+            <tr key={row.id} className="row">
+              <td>
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${row.poster_path}`}
+                  alt={`${row.title} poster`}
+                />
+              </td>
+              <td>{row.title}</td>
+              <td className="overview">{row.overview}</td>
+              <td>
+                <i
+                  className="fas fa-trash-alt"
+                  onClick={() => deleteList(row)}
+                ></i>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );

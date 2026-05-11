@@ -1,88 +1,97 @@
-import "./movieInfo.css";
+import "./movieinfo.css";
 import ReactPlayer from "react-player";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 import StarRating from "../../components/star-rating/StarRating";
+import Loading from "../../components/loading/Loading";
+import { useAuth } from "../../auth/AuthContext";
 
 const MovieInfo = (props) => {
-  const { match, setWishList, wishList } = props;
+  const { match } = props;
 
   const [movie, setMovie] = useState(null);
   const [videoKey, setVideoKey] = useState("");
-  const api_key = "4f5c14eec74770b20682e85f6fe0691b";
   const youtubeUrl = "https://www.youtube.com/embed/";
   const history = useHistory();
+  const { isLogged } = useAuth();
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${match.params.id}?api_key=${api_key}&append_to_response=videos`
-    )
+    fetch(`/api/movies/${match.params.id}`)
       .then((res) => res.json())
       .then((data) => {
+        if (!data || data.error) return;
         setMovie(data);
-        // console.log(data.videos.results[0].key);
-        setVideoKey(data.videos.results[0].key);
+        setVideoKey(data.videos?.results?.[0]?.key ?? "");
       })
       .catch((err) => console.log(err));
-  }, [match]);
+  }, [match.params.id]);
 
-  const handleClickToWishList = (movie) => {
-    const filter = wishList.filter((list) => {
-      //  console.log(list.id, movie.id);
-      return list.id === movie.id;
-    });
-    // console.log(filter);
-    if (filter.length > 0) {
-      alert("Movie Already Exist In Your Wish List!");
-    } else {
-      setWishList((prevList) => [...prevList, movie]);
-      history.push('/wishlist');
+  const handleClickToWishList = async () => {
+    try {
+      await axios.post("/api/user/wishlist", {
+        id: movie.id,
+        title: movie.title,
+        overview: movie.overview,
+        poster_path: movie.poster_path,
+      });
+      history.push("/wishlist");
+    } catch (err) {
+      if (err.response?.status === 409) {
+        alert("Movie Already Exist In Your Wish List!");
+      } else {
+        console.log(err);
+      }
     }
   };
 
+  if (!movie) return <Loading />;
+
   return (
-    <>
-      {movie ? (
-        <div className="content-wraps">
-          <div className="movie-description">
-            {videoKey ? (
-              <ReactPlayer
-                muted
-                width="100%"
-                height="400px"
-                playing
-                url={youtubeUrl + videoKey}
-              />
-            ) : null}
-            <div className="rating">
-              <h1>{movie.vote_average}</h1>
-              <StarRating star_rating={movie.vote_average} />
-            </div>
-            <h1>{movie.title}</h1>
-            <h2>{movie.release_date}</h2>
-            <h3>{movie.production_countries[0].name}</h3>
-            <p>{movie.overview}</p>
-            <div className="btn-container">
-              <a target="_blank" rel="noreferrer" href={movie.homepage}>
-                for more detail !
-              </a>
-              <button
-                className="wish-list-btn"
-                onClick={() => handleClickToWishList(movie)}
-              >
-                Add to wish list
-              </button>
-            </div>
-          </div>
-          <div className="movie-poster">
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt="movie-poster"
-            />
-          </div>
+    <div className="content-wraps">
+      <div className="movie-description">
+        {videoKey ? (
+          <ReactPlayer
+            muted
+            width="100%"
+            height="400px"
+            playing
+            url={youtubeUrl + videoKey}
+          />
+        ) : null}
+        <div className="rating">
+          <h1>{movie.vote_average}</h1>
+          <StarRating star_rating={movie.vote_average} />
         </div>
-      ) : null}
-    </>
+        <h1>{movie.title}</h1>
+        <h2>{movie.release_date}</h2>
+        <h3>{movie.production_countries?.[0]?.name}</h3>
+        <p>{movie.overview}</p>
+        <div className="btn-container">
+          <a target="_blank" rel="noreferrer" href={movie.homepage}>
+            for more detail !
+          </a>
+          {isLogged ? (
+            <button
+              className="wish-list-btn"
+              onClick={handleClickToWishList}
+            >
+              Add to wish list
+            </button>
+          ) : (
+            <p className="auth-prompt">
+              <Link to="/register">Register</Link> to add movies to your wishlist.
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="movie-poster">
+        <img
+          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+          alt="movie-poster"
+        />
+      </div>
+    </div>
   );
 };
 

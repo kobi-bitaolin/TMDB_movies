@@ -49,6 +49,22 @@
         color: #ffffff;
 }
 
+.auth-prompt {
+    margin: 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.auth-prompt a {
+    color: #ff4800;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-prompt a:hover {
+    text-decoration: underline;
+}
+
 
 
   

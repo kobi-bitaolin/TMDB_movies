@@ -1,3 +1,4 @@
+import './slider.css';
 import { useState, useEffect } from 'react';
 
 const Slider = (props) => {
@@ -5,33 +6,14 @@ const Slider = (props) => {
     const [imageIndex, setImageIndex] = useState(0);
 
     useEffect(() => {
-        let interval;
-        // console.log('useEffect');
+        if (!props.homePageImages.length) return;
 
-        if (props.homePageImages.length) {
+        const interval = setInterval(() => {
+            setImageIndex((i) => (i + 1) % props.homePageImages.length);
+        }, 3000);
 
-            interval = setInterval(() => {
-
-                console.log('props' ,props.homePageImages.length - 1 ,'inedx', imageIndex );
-
-                if (props.homePageImages.length - 1 === imageIndex ) {
-
-                    setImageIndex(0);
-
-                } else {
-
-                    setImageIndex((imageIndex) => imageIndex + 1)
-                }
-
-            }, 2000)
-        }
-
-
-        return () => {
-            clearInterval(interval);
-        };
-
-    }, [props.homePageImages.length, imageIndex])
+        return () => clearInterval(interval);
+    }, [props.homePageImages.length])
 
     let imageElement = (
         <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/db/The_Movies_Coverart.jpg/220px-The_Movies_Coverart.jpg" alt="poster"
@@ -47,9 +29,12 @@ const Slider = (props) => {
     };
 
     return (
-        <div>
+       <div className="slider-container">
+        <div className="slider-image-wrapper">
             {imageElement}
         </div>
+        {/* Optional: add a progress bar or dots at the bottom */}
+    </div>
     )
 }
 

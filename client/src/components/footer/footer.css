@@ -1,11 +1,30 @@
+.footer {
+    height: 150px;
+    background-color: #0d253f; /* Matches the TMDB navbar */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    /* Keeps the footer pinned to the bottom even with little content */
+    margin-top: auto;
+}
 
+.footer-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
 
+.footer-brand {
+    color: #01b4e4; /* Brand cyan */
+    font-weight: bold;
+}
 
- .footer{
-   height: 150px;
-   background-color: #161515;
-   color: #ffffff;
-   display: flex;
-   justify-content: center;
-   align-items: center;
- }
+.footer-links {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #b3b3b3;
+}

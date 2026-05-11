@@ -1,7 +1,89 @@
+/* Main container keeps the form layout */
 .form-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 150px;
-    margin-bottom: 245px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px;
+    margin: 80px auto;
+
+
+    width: 90%; /* Takes 90% width on mobile */
+    max-width: 350px; /* Caps at 350px on larger screens */
+
+
+    /* --- Fix here --- */
+    min-height: 500px; /* Fixed minimum height shared by both forms */
+}
+
+/* Input styling */
+.form-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Login button styling */
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #01b4e4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px; /* Gap between button and link */
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #032541;
+}
+
+/* --- "Sign now" link styling --- */
+.form-container a {
+    color: #01b4e4; /* Brand color */
+    text-decoration: none; /* Removes the default underline */
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.form-container a:hover {
+    color: #032541;
+    text-decoration: underline; /* Underline appears on hover only */
+    transform: translateY(-1px); /* Subtle lift effect */
+}
+
+/* Optional: add text before the link via CSS */
+.form-container a::before {
+    content: "New here? ";
+    color: #666;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.error-message {
+    color: #d32f2f;
+    background-color: #fdecea;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #f44336;
 }

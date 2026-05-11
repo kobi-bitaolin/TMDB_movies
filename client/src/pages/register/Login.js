@@ -1,39 +1,44 @@
 import "./register.css";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
 
 function Login() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
-  const [token, setToken] = useState("");
+  const [error, setError] = useState("");
+  const history = useHistory();
+  const { login } = useAuth();
 
   const handleInputs = (e) => {
-    const inputs = { ...userLogin };
-    inputs[e.target.name] = e.target.value;
-    setUserLogin(inputs);
+    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
   };
 
-  const isUserRegistered = (e) => {
+  const submitLogin = (e) => {
     e.preventDefault();
-    const checkLog = { ...userLogin };
+    setError("");
 
     axios
       .post("/api/user/login", {
-        email: checkLog.email,
-        password: checkLog.password,
+        email: userLogin.email,
+        password: userLogin.password,
       })
       .then((res) => {
-        if (res.status === 200) {
-          console.log("user have an a count");
-          console.log(res.data);
-          setToken(res.data);
+        if (res.status === 200 && res.data.token) {
+          login(res.data);
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.data) {
+          setError(err.response.data.error || "Something went wrong");
         }
       });
   };
 
-  console.log(token);
   return (
-    <form className="form-container">
+    <form className="form-container" onSubmit={submitLogin}>
+      {error && <div className="error-message">{error}</div>}
       <input
         name="email"
         type="email"
@@ -46,7 +51,7 @@ function Login() {
         placeholder="Password"
         onChange={handleInputs}
       />
-      <button onClick={isUserRegistered}>login</button>
+      <button type="submit">login</button>
       <Link to="/register">Sign now</Link>
     </form>
   );

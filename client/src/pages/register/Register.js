@@ -1,12 +1,11 @@
 import './register.css';
 import axios from "axios";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-function Register(props) {
-
-  const { isLogged, setIsLogged } = props;
-  console.log(isLogged);
-  
+function Register() {
+  const history = useHistory();
+  const [error, setError] = useState("");
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -14,36 +13,30 @@ function Register(props) {
   });
 
   const handleInputs = (e) => {
-    const inputs = { ...newUser };
-    inputs[e.target.name] = e.target.value;
-    setNewUser(inputs);
+    setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
   const createUser = (e) => {
     e.preventDefault();
-    const userData = { ...newUser };
+    setError("");
 
     axios
-      .post("/api/user/register", {
-        name: userData.name,
-        email: userData.email,
-        password: userData.password,
-        
-      })
+      .post("/api/user/register", newUser)
       .then((res) => {
-        console.log(res.status);
-        if(res.status === 200) {
-          console.log(res.data);
-          setIsLogged(true);
+        if (res.status === 200) {
+          history.push("/login");
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        if (err.response && err.response.data) {
+          setError(err.response.data.error || "Something went wrong");
+        }
       });
   };
 
   return (
-    <form className="form-container">
+    <form className="form-container" onSubmit={createUser}>
+      {error && <div className="error-message">{error}</div>}
       <input
         name="name"
         type="text"
@@ -62,7 +55,7 @@ function Register(props) {
         placeholder="Password"
         onChange={handleInputs}
       />
-      <button onClick={createUser}>Register</button>
+      <button type='submit'>Register</button>
     </form>
   );
 }

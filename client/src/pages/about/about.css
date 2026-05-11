@@ -1,12 +1,43 @@
-
 .about-page {
-    background-color: gray;
-    width: 100%;
+    background-color: #0d253f; /* TMDB dark blue */
+    min-height: calc(100vh - 214px); /* Height left between navbar and footer */
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 40px 20px;
 }
 
-.header{
-   min-height: 720px;
+.about-card {
+    background-color: #ffffff;
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+.about-card h1 {
+    color: #01b4e4; /* Brand cyan */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.about-card .content p {
+    color: #333;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    .about-card {
+        padding: 30px;
+    }
+    .about-card h1 {
+        font-size: 1.8rem;
+    }
 }

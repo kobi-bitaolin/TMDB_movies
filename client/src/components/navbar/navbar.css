@@ -1,56 +1,141 @@
-
-
-
-nav  {
-    height: 60px;
-    color: #ffffff;  
-    background-color: rgba(0, 0, 0);
-}
-
-nav ul {
-    margin: 0;
-    padding: 0;
+/* Base navbar styles */
+.nav {
+    background-color: #032541; /* TMDB dark blue */
+    height: 64px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 40px;
 }
 
-li {
-    list-style: none;
-    margin-top: 15px;
+/* Inner container for spacing control */
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.link {
-   font-size: 1rem;
-   font-family: 'Roboto', sans-serif;
-   padding: 25px;
-   color: #ffffff;
-   text-decoration: none;
-   list-style: none;
-   
-}
-
-.link:hover{
-    color: #ff4800;
+/* Logo styling */
+.nav .logo {
+    color: #01b4e4; /* TMDB cyan */
+    font-size: 1.8rem;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-.logo {
-  margin-left: auto !important;
-  font-size: 25px;
-  color: #ff4800;
-  margin: 9px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  border: solid 2px #ffffff;
-  border-radius: 4px;
-  padding: 4px;
-  box-shadow: 2px 2px 2px #f5eeee;
-  background-color: #ffffff;
+/* List styling */
+.nav .ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
 
-.logo:hover {
-    background-color: black;
+/* Link styling */
+.nav .link {
     color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
+.nav .link:hover {
+    color: #01b4e4;
+}
 
+/* Highlighted login button */
+.nav .login-btn {
+    background-color: #01b4e4;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.nav .login-btn:hover {
+    background-color: #ffffff;
+    color: #032541;
+}
+
+/* Reset browser defaults on the <button> variant of .login-btn (Logout). */
+.nav button.login-btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* "Hi, <name>" greeting shown when the user is logged in. */
+.nav .user-greeting {
+    color: #01b4e4;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .nav {
+        padding: 0 20px;
+    }
+    .nav .ul {
+        gap: 15px;
+    }
+    .nav .link {
+        font-size: 0.9rem;
+    }
+}
+
+/* Hamburger button (hidden by default) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: 0.3s;
+}
+
+/* Mobile adjustments — where the menu becomes a drawer */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Show the hamburger on small screens */
+    }
+
+    .nav .ul {
+        position: fixed; /* Fixed so it doesn't push the page content */
+        right: -100%; /* Hidden off-screen */
+        top: 64px; /* Matches the navbar height */
+        flex-direction: column;
+        background-color: #032541; 
+        width: 100%;
+        height: calc(100vh - 64px); /* Fills the remaining viewport */
+        text-align: center;
+        transition: 0.3s;
+        gap: 40px;
+        padding-top: 50px;
+        z-index: 1000;
+    }
+
+    .nav .ul.active {
+        right: 0; /* Slides in when the hamburger is clicked */
+    }
+
+    /* X effect when the hamburger is open */
+    .bar.active:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .bar.active:nth-child(2) { opacity: 0; }
+    .bar.active:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}

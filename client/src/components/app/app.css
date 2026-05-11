@@ -1,8 +1,20 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+/* Base styles for the whole app */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
 }
 
+/* Central section that pushes the footer down */
+.main-content {
+    flex: 1; /* Tells this section to grow and fill the available space */
+    display: flex;
+    flex-direction: column;
+}
 
-
+/* Make sure there are no stray margins causing scroll */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}

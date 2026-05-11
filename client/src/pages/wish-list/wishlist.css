@@ -1,17 +1,25 @@
+/* Main container */
 .wishlist-container {
     width: 100%;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    min-height: 70vh; /* Use vh instead of px so it scales with the viewport */
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
+/* Table styling */
 table {
-    width: 80%;
+    width: 100%; /* Take the full available width */
+    max-width: 1000px;
     margin: 0 auto;
+    border-collapse: collapse;
 }
 
 td {
-   padding: 30px;
+    padding: 15px; /* Reduced padding to fit mobile too */
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
 .fas {
@@ -20,20 +28,63 @@ td {
     cursor: pointer;
 }
 
+/* Empty-state message — responsive */
 .message-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 200px;
-    margin-bottom: 444px;
-    
+    padding: 50px 20px; /* Use padding instead of a huge margin */
+    text-align: center;
 }
+
 .message-container h4 {
     border: 2px solid #000;
-    padding: 30px;
-    background-color: red;
-    color: #fff
+    padding: 20px;
+    background-color: #e50914; /* Movie/Netflix red */
+    color: #fff;
+    max-width: 500px;
+    line-height: 1.6;
+    border-radius: 8px;
+    font-size: 1.1rem;
 }
 
-  
+/* --- Responsive media queries --- */
 
+@media (max-width: 768px) {
+    /* Make the table more flexible on mobile */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* Hide table headers on mobile if present */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    td {
+        border: none;
+        padding: 10px;
+        position: relative;
+        text-align: right; /* Right-align text on mobile */
+    }
+
+    /* Center the message on mobile */
+    .message-container {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .message-container h4 {
+        font-size: 1rem;
+        padding: 15px;
+    }
+}

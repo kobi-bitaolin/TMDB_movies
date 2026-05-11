@@ -1,14 +1,20 @@
 import './about.css';
 
- function About() {
+function About() {
     return (
         <div className="about-page">
-          <div className="header">
-            <h1>about</h1>
-            <p>.loraamsnfmnasv,fAVNSF,SAVN,FNVSANBFVXZ CZXXCXzxc,NVZXMCNMNVXCBXC,ZMVNMVHHvhlsdjhgalfljdhvzxmcvzncnvxzcvhjkxvchznxbc,mzbcnm,zxvncjZXVchvz,znxvcnbzvxncbvzxhckldckjhkljsdhfjkfhkh</p>
-          </div>
-         </div>
-    )
+            <div className="about-card">
+                <h1>About TMDB Movies</h1>
+                <div className="content">
+                    <p>
+                        Welcome to my movie application! This project was built using the 
+                        MERN stack (MongoDB, Express, React, Node.js) and integrates with 
+                        the TMDB API to provide real-time movie data.
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default About;

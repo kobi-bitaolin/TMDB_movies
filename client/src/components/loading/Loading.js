@@ -1,11 +1,11 @@
-import React from 'react'
+import './loading.css';
 
 function Loading() {
     return (
-        <div>
-            
+        <div className="loading-container">
+            <div className="loading-spinner" />
         </div>
-    )
+    );
 }
 
 export default Loading;

@@ -1,0 +1,36 @@
+.slider-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.slider-image-wrapper {
+    width: 100%;
+    /* Fixed aspect ratio so the page doesn't jump when images swap */
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    background-color: #000; /* Black background while the image loads */
+}
+
+.slider-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Preserve the original image ratio without distortion */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition */
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+    .slider-image-wrapper {
+        aspect-ratio: 4 / 3; /* More square ratio for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-image-wrapper {
+        aspect-ratio: 1 / 1; /* Perfect square on mobile so the poster looks larger */
+    }
+}
