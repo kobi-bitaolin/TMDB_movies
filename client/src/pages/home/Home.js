@@ -12,10 +12,8 @@ const Home = () => {
             .then(data => {
                 setHomePageImages(data.results);
             })
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
     }, [])
-
-    // console.log(homePageImages);
 
     return (
         <div className="home-page">

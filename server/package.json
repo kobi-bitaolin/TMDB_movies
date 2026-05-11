@@ -5,9 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch .env --ext js,mjs,json,env app.js",
-    "client": "cd../client && npm start",
-    "dev": "concurrently \"npm run start\" \"npm run client\""
+    "start": "node app.js",
+    "start:dev": "nodemon --watch .env --ext js,mjs,json,env app.js",
+    "client": "cd ../client && npm start",
+    "dev": "concurrently \"npm run start:dev\" \"npm run client\"",
+    "build": "cd ../client && npm install && NODE_OPTIONS=--openssl-legacy-provider npm run build"
   },
   "author": "kobi",
   "license": "ISC",

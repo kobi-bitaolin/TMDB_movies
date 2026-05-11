@@ -24,7 +24,7 @@ const MovieInfo = (props) => {
         setMovie(data);
         setVideoKey(data.videos?.results?.[0]?.key ?? "");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, [match.params.id]);
 
   const handleClickToWishList = async () => {
@@ -40,7 +40,7 @@ const MovieInfo = (props) => {
       if (err.response?.status === 409) {
         alert("Movie Already Exist In Your Wish List!");
       } else {
-        console.log(err);
+        console.error(err);
       }
     }
   };

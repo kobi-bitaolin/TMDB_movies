@@ -1,23 +1,4 @@
-
-.image-box {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.image{
-   margin: 20px;
-   border: 10px black solid;
-   box-shadow: 3px 3px 3px #000000;
-}
-
-.home-page > h1 {
-    text-align: center;
-    margin-top: 10px;
-    text-transform: uppercase;
-
-}.home-page {
+.home-page {
     background-color: #0d253f; /* Brand background color */
     color: white;
     min-height: 100vh;
@@ -36,6 +17,7 @@
 
 .image-box {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -46,6 +28,7 @@
 .image {
     width: 100%;
     max-width: 1000px; /* Caps the slider size on large screens */
+    margin: 20px;
     border: 5px solid #01b4e4; /* Thin, premium-looking border */
     border-radius: 15px; /* Rounded corners */
     overflow: hidden;

@@ -34,7 +34,7 @@ const SearchMovie = () => {
       .then((data) => {
         setMovies(data.results);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   };
 

@@ -4,8 +4,9 @@ function Message() {
   return (
     <div className="message-container">
       <h4>
-        You have not selected any movies for your list. What are you waiting
-        for? Go to the list of movies, and add movies that you would
+        You have not selected any movies for your list.
+        <br />
+        Go to the list of movies, and add movies that you would
         like to see!
       </h4>
     </div>

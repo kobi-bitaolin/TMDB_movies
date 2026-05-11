@@ -12,7 +12,7 @@ function WishList() {
     axios
       .get("/api/user/wishlist")
       .then((res) => setWishList(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
 
@@ -21,7 +21,7 @@ function WishList() {
       const res = await axios.delete(`/api/user/wishlist/${row.id}`);
       setWishList(res.data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

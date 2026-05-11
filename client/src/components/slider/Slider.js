@@ -20,8 +20,6 @@ const Slider = (props) => {
         />
     );
 
-        // console.log('props', props.homePageImages[imageIndex], 'index',imageIndex);
-
     if (props.homePageImages.length && props.homePageImages[imageIndex].poster_path) {
         imageElement = (
             <img src={`https://image.tmdb.org/t/p/w500/${props.homePageImages[imageIndex].poster_path}`} alt="poster"/>
